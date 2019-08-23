@@ -1,0 +1,33 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: marks-dummy-pod
+spec:
+  containers:
+    - name: marks-dummy-pod
+      image: ubuntu
+      command: ["/bin/bash", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+  restartPolicy: Never
+
+
+$ kubectl apply -f pod.yaml 
+The Pod "marks-dummy-pod" is invalid: spec: Forbidden: pod updates may not change fields other than `spec.containers[*].image`, `spec.initContainers[*].image`, `spec.activeDeadlineSeconds` or `spec.tolerations` (only additions to existing tolerations)
+Oops, we need to delete it first so let's do that:
+
+
+$ kubectl delete pod marks-dummy-pod
+pod "marks-dummy-pod" deleted
+Attempt #2:
+
+
+$ kubectl apply -f pod.yaml 
+pod "marks-dummy-pod" created
+And let's checkup on our pod:
+
+
+$ kubectl get pods
+NAME              READY     STATUS    RESTARTS   AGE
+marks-dummy-pod   1/1       Running   0          14s
+Looks better already. Let's check the logs
+
+$ kubectl logs marks-dummy-pod 
