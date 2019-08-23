@@ -77,7 +77,12 @@ kubectl get pod nginx-pod -o yaml
 kubectl describe pod nginx-pod
  ```
 
-  ### workshop examples coming soon...
+### Refernce 
+
+ - Srinath Challa https://www.youtube.com/user/srinathrchalla1
+ 
+
+### workshop examples coming soon...
 
 
 
